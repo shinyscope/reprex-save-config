@@ -15,7 +15,13 @@ shinyUI(
         )
       ),
       mainPanel(
-        "Set your configuration here.",
+        tags$h3("Instructions"),
+        tags$ol(),
+        tags$li("Set your configuration settings in the slider and radio button below."),
+        tags$li("Click \"Save Config\" button in sidebar. Check your local directory to see if a config.json file has been created."),
+        tags$li("Change settings in slider and radio buttons."),
+        tags$li("Click \"Load Config\" to restore previous settings."),
+        hr(),
         sliderInput("weight", "Weight:", min = 0, max = 1, value = 0),
         radioButtons("agg_method", label = "Aggregation Method", 
                      choices = list("Equally weighted" = "equally_weighted",

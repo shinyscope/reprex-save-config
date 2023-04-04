@@ -8,4 +8,10 @@ shinyServer(function(input, output, session) {
                               agg_method = input$agg_method),
                          "config.json")
   })
+  
+  observeEvent(input$load_config, { 
+    config <- jsonlite::read_json("config.json")
+    updateSliderInput(session, "weight", value = config$weight)
+    updateRadioButtons(session, "agg_method", selected = config$agg_method)
+  })
 })
