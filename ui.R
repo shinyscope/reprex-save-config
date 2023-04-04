@@ -21,7 +21,7 @@ shinyUI(
                      choices = list("Equally weighted" = 1, "Weight by points" = 2),
                      selected = 1),
         hr(),
-        "Configuration settings as a list in R:",
+        "Here is what the current configuration settings look like as a list in R:",
         verbatimTextOutput("config_list")
       )
     )))
