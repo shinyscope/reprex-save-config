@@ -1,5 +1,5 @@
 shinyUI(
-  
+
   fluidPage(
     sidebarLayout(
       sidebarPanel(
@@ -28,7 +28,16 @@ shinyUI(
                                     "Weight by points" = "weight_by_points"),
                      selected = 1),
         hr(),
+        #upload
+        h4("Upload File"),
+        fileInput("upload", "Upload a csv file", accept = c(".csv")),
+        p("Original Data",
+          dataTableOutput("data")),
+        hr(),
         "Here is what the current configuration settings look like as a list in R:",
+       
+        hr(),
+
         verbatimTextOutput("config_list")
       )
     )))
