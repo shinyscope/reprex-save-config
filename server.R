@@ -11,6 +11,9 @@ pool <- dbPool(RSQLite::SQLite(), dbname = "db.sqlite")
 
 shinyServer(function(input, output, session) {
   
+  path <- "~/data"
+  dir.create(path, showWarnings = FALSE)
+  
   output$config_list <- renderPrint({ list(weight = input$weight,
                                            agg_method = input$agg_method) })
   
@@ -18,11 +21,11 @@ shinyServer(function(input, output, session) {
     jsonlite::write_json(list(weight = input$weight,
                               agg_method = input$agg_method,
                               data = input$upload),
-                         "config.json")
+                         paste(path, "config.json", sep = "/"))
   })
   
   observeEvent(input$load_config, { 
-    config <- jsonlite::read_json("config.json")
+    config <- jsonlite::read_json(paste(path, "config.json", sep = "/"))
     updateSliderInput(session, "weight", value = config$weight)
     updateRadioButtons(session, "agg_method", selected = config$agg_method)
     update
