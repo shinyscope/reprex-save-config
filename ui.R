@@ -28,6 +28,7 @@ shinyUI(
                                     "Weight by points" = "weight_by_points"),
                      selected = 1),
         hr(),
+        shinyFilesButton('files', label='File select', title='Please select a file', multiple=FALSE),
         #upload
         #h4("Upload File"),
         #fileInput("upload", "Upload a csv file", accept = c(".csv")),
@@ -38,6 +39,7 @@ shinyUI(
        
         hr(),
 
-        verbatimTextOutput("config_list")
+        verbatimTextOutput("config_list"),
+        hr(),
       )
     )))

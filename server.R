@@ -5,6 +5,7 @@ library(pool)
 library(shinyjs)
 library(uuid)
 library(dplyr)
+library(shinyFiles)
 
 # pool <- dbPool(RSQLite::SQLite(), dbname = "db.sqlite")
 
@@ -31,6 +32,7 @@ shinyServer(function(input, output, session) {
     update
   })
   
+  shinyFileChoose(input, 'files', root=c(root='.'))
   
   #####------------------------uploading a file------------------------#####
   # data <- reactive({
