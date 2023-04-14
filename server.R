@@ -6,12 +6,12 @@ library(shinyjs)
 library(uuid)
 library(dplyr)
 
-pool <- dbPool(RSQLite::SQLite(), dbname = "db.sqlite")
+# pool <- dbPool(RSQLite::SQLite(), dbname = "db.sqlite")
 
 
 shinyServer(function(input, output, session) {
   
-  path <- "~/data"
+  path <- "../gradebook-data"
   dir.create(path, showWarnings = FALSE)
   
   output$config_list <- renderPrint({ list(weight = input$weight,
@@ -33,27 +33,27 @@ shinyServer(function(input, output, session) {
   
   
   #####------------------------uploading a file------------------------#####
-  data <- reactive({
-    req(input$upload)
-    
-    ext <- tools::file_ext(input$upload$name)
-    switch(ext,
-           csv = vroom::vroom(input$upload$datapath, delim = ",", na = c("", "NA")),
-           validate("Invalid file; Please upload a .csv or .tsv file")
-    )
-  })
+  # data <- reactive({
+  #   req(input$upload)
+  #   
+  #   ext <- tools::file_ext(input$upload$name)
+  #   switch(ext,
+  #          csv = vroom::vroom(input$upload$datapath, delim = ",", na = c("", "NA")),
+  #          validate("Invalid file; Please upload a .csv or .tsv file")
+  #   )
+  # })
   
   #####------------------------ the original uploaded data------------------------#####
-  output$data <- renderDataTable({
-    data <- data()
-    if(is.null(input$upload)){
-      return("Upload some data first")
-    }
-    else{
-      read.table(input$upload$datapath, sep = ",", header = TRUE, fill=TRUE)
-    }
-  })
-  
+  # output$data <- renderDataTable({
+  #   data <- data()
+  #   if(is.null(input$upload)){
+  #     return("Upload some data first")
+  #   }
+  #   else{
+  #     read.table(input$upload$datapath, sep = ",", header = TRUE, fill=TRUE)
+  #   }
+  # })
+  # 
   #####------------------------saving the dataframe in SQL------------------------#####
 
   
